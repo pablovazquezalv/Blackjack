@@ -2,24 +2,35 @@ package clases;
 
 public class Nombres {
 
-    private String Nombre;
-    private String Cantidad;
+    private String nombre;
+    private String numero;
     private String urlImg;
 
-    public String getNombre() {
-        return Nombre;
+
+    public Nombres(String nombre,String Cantidad,String urlImg)
+    {
+        this.nombre=nombre;
+        this.numero=numero;
+        this.urlImg=urlImg;
+    }
+    public String getNombre()
+    {
+        return nombre;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setNombre(String nombre)
+    {
+        nombre = nombre;
     }
 
-    public String getCantidad() {
-        return Cantidad;
+    public String getCantidad()
+    {
+        return numero;
     }
 
-    public void setCantidad(String cantidad) {
-        Cantidad = cantidad;
+    public void setCantidad(String cantidad)
+    {
+        numero = numero;
     }
 
     public String getUrlImg() {

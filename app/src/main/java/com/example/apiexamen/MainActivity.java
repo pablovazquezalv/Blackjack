@@ -26,10 +26,13 @@ import clases.numeros;
 
 public class MainActivity extends AppCompatActivity {
 
-   // private ArrayList<numeros> numeroslist;
+
     RecyclerView recyclerView;
     //BOTONES
-    Button botonpedirnumero,botonenviardatos,botonirarecyclewview;
+    Button botonpedirnumero;
+    Button botonenviardatos;
+    Button botonirarecyclewview;
+    Button btnlimpiar;
     TextView textnum,txtmarcador;
     int numero=0,sumador=0,turno=0;
 
@@ -45,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         requestQueue = Singleton.getInstance(MainActivity.this).getRequestQueue();
 
          txtmarcador=(TextView) findViewById(R.id.sumatoria);
-        botonpedirnumero.setOnClickListener(new View.OnClickListener()
+        //PEDIR NUMEROS
+         botonpedirnumero.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
@@ -53,15 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 textnum=(TextView) findViewById(R.id.setnumeros);
 
                 String url ="https://ramiro.uttics.com/api/numero";
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>()
+                {
                     @Override
-                    public void onResponse(JSONObject response) {
-
+                    public void onResponse(JSONObject response)
+                    {
                         Gson gson=new Gson();
                        numeros respuesta=gson.fromJson(response.toString(),numeros.class);
                        numero=Integer.parseInt(respuesta.getNumero());
                        textnum.setText(respuesta.getNumero());
-
 
                         if(turno==3)
                         {
@@ -85,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Tu Suma"+sumador, Toast.LENGTH_SHORT).show();
                             txtmarcador.setText(""+sumador);
                         }
-
-
                     }
                 },
                         new Response.ErrorListener()
@@ -100,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        //IR AL OTRO ACTIVITY DE DATOS
+        //IR AL RESULTADOS
         botonirarecyclewview=(Button) findViewById(R.id.verresultados);
         botonirarecyclewview.setOnClickListener(new View.OnClickListener()
         {
@@ -111,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //ENVIAR DATOS
         botonenviardatos=(Button) findViewById(R.id.enviarresultados);
         botonenviardatos.setOnClickListener(new View.OnClickListener()
         {
@@ -123,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 try
                 {
                     jsonBody.put("nombre","Pablo");
-                    jsonBody.put("cantidad",sumador);
+                    jsonBody.put("numero",""+sumador);
                  } catch (JSONException e)
                 {
                     e.printStackTrace();
@@ -135,21 +138,47 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                JsonObjectRequest peticion = new JsonObjectRequest(Request.Method.POST, url, jsonBody, new Response.Listener<JSONObject>()
+                JsonObjectRequest peticion = new JsonObjectRequest(Request.Method.POST, url, array, new Response.Listener<JSONObject>()
                 {
                     @Override
                     public void onResponse(JSONObject response)
                     {
-                        Toast.makeText(MainActivity.this,"Su Puntuacion ha sido enviada UwU",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,"Su Puntuacion ha sido enviada ",Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(MainActivity.this,"HUBO ERROR",Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+                requestQueue.add(peticion);
+
+            }
+        });
+
+        btnlimpiar=(Button) findViewById(R.id.btnlimpiar);
+        btnlimpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                String url3="https://ramiro.uttics.com/api/limpiar";
+                JsonObjectRequest limpiar = new JsonObjectRequest(Request.Method.POST, url3, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response)
+                    {
+                        Toast.makeText(MainActivity.this,"Se limpio",Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
                     }
-                });
+                });   requestQueue.add(limpiar);
             }
         });
+
 
     }
 

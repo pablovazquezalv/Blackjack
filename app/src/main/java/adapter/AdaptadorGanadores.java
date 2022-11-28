@@ -35,9 +35,9 @@ public class AdaptadorGanadores extends RecyclerView.Adapter<AdaptadorGanadores.
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorGanadores.MyViewHolder holder, int position) {
-      holder.setName(nombres.get(position));
-      holder.setCount(nombres.get(position));
-     // holder.setUrl(nombres.get(position));
+      holder.setData(nombres.get(position));
+      //      holder.setCount(nombres.get(position));
+      // holder.setUrl(nombres.get(position));
       //  Nombres num=nombres.get(position);
       //  numeros p = nombres.get(position);
         Picasso.get().load("https://fer-uig.glitch.me/").into(holder.img);
@@ -61,20 +61,11 @@ public class AdaptadorGanadores extends RecyclerView.Adapter<AdaptadorGanadores.
 
         }
 
-        public void setName(Nombres namedato)
+        public void setData(Nombres namedato)
         {
             name.setText(namedato.getNombre());
-        }
-
-        public void setCount(Nombres countdato)
-        {
-            count.setText(countdato.getCantidad());
-
-        }
-
-        public void setUrl(Nombres urldato)
-        {
-            url.setText(urldato.getUrlImg());
+            //name.setText("pablo");
+            count.setText(namedato.getCantidad());
         }
 
     }

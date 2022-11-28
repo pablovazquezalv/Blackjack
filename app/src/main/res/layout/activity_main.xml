@@ -89,5 +89,18 @@
         app:layout_constraintTop_toBottomOf="@+id/pedirnumero"
         app:layout_constraintVertical_bias="0.584" />
 
+    <Button
+        android:id="@+id/btnlimpiar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:text="REINICIAR"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/setnumeros"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/txtname"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:text="nombre:"
-        android:textAlignment="center"
+        android:layout_width="108dp"
+        android:layout_height="101dp"
+        android:background="@color/black"
+        android:text="pABLO"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.102"
